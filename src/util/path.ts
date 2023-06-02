@@ -7,8 +7,8 @@ export interface Directories {
 
 export interface Files {
     "download": {
-        "artists": string,
-        "tracks": string
+        "artist": string,
+        "track": string
     }
 }
 
@@ -18,8 +18,8 @@ export const directories: Directories = {
 
 export const files: Files = {
     "download": {
-        "artists": "artists",
-        "tracks": "tracks"
+        "artist": "artists",
+        "track": "tracks"
     }
 };
 

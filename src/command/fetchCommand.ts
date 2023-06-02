@@ -29,7 +29,7 @@ export const fetchCommand: Command = {
             }
         }
 
-        await writeFile(files.download.artists, JSON.stringify(artists));
-        await writeFile(files.download.tracks, JSON.stringify(tracks));
+        await writeFile(files.download.artist, JSON.stringify(artists));
+        await writeFile(files.download.track, JSON.stringify(tracks));
     }
 };
