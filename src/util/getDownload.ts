@@ -1,4 +1,4 @@
-import { files } from "~/util/path";
+import { files } from "./path";
 import { readFile } from "node:fs/promises";
 
 export async function getDownload(type: keyof typeof files.download) {

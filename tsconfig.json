@@ -17,10 +17,7 @@
         "declaration": true,
         "skipLibCheck": true,
         "listFiles": true,
-        "types": ["node"],
-        "paths": {
-            "~/*": ["./src/*"]
-        }
+        "types": ["node"]
     },
     "typedocOptions": {
         "entryPoints": ["src/index.ts"],
@@ -36,6 +33,12 @@
     },
     "files": ["./.eslintrc.cjs"],
     "include": [
-        "src"
+        "**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "tests",
+        "build",
+        "dist"
     ]
 }

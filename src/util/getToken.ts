@@ -1,4 +1,4 @@
-import { headers, injectToken } from "~/util/common/headers";
+import { headers, injectToken } from "./common/headers";
 import { chalk, fetch } from "zx";
 
 import * as dotenv from "dotenv";
@@ -41,9 +41,10 @@ export async function getToken() {
     }
 
     const tokenData = await fetchToken.json();
-    // todo: types
+    // @ts-ignore
     fetchedToken = tokenData.access_token;
 
+    // @ts-ignore
     injectToken(tokenData.token_type, fetchedToken);
     return fetchedToken;
 }

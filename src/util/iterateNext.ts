@@ -1,5 +1,5 @@
 import { fetch } from "zx";
-import { headers } from "~/util/common/headers";
+import { headers } from "./common/headers";
 
 export async function iterateNext(startingPoint: URL) {
     const responses: any[] = [];
@@ -7,14 +7,14 @@ export async function iterateNext(startingPoint: URL) {
     let next: URL | false = startingPoint;
     while (next) {
         const response = await fetch(next.toString(), {
-            // todo: types
+            // @ts-ignore
             headers
         });
 
         const responseData = await response.json();
         responses.push(responseData);
 
-        // todo: types
+        // @ts-ignore
         next = responseData.next ? new URL(responseData.next) : false;
     }
 

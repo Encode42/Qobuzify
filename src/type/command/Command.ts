@@ -1,4 +1,4 @@
-import type { Option } from "~/type/command/Option";
+import type { Option } from "./Option";
 
 export interface Command {
     "name": string,

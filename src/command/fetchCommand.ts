@@ -1,7 +1,7 @@
-import type { Command } from "~/type/command/Command";
+import type { Command } from "../type/command/Command";
 import { writeFile } from "node:fs/promises";
-import { getProfilePlaylists } from "~/util/getProfilePlaylists";
-import { files } from "~/util/path";
+import { getProfilePlaylists } from "../util/getProfilePlaylists";
+import { files } from "../util/path";
 
 interface DownloadedType {
     [key: string]: boolean

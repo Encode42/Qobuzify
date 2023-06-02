@@ -1,4 +1,4 @@
-import { iterateNext } from "~/util/iterateNext";
+import { iterateNext } from "./iterateNext";
 
 interface Artist {
     "label": string
@@ -33,9 +33,9 @@ export async function getProfilePlaylists(id: string) {
                         continue;
                     }
 
-                    // todo: types
                     tracks.push({
                         "label": track.track.name,
+                        // @ts-ignore
                         "artists": track.track.artists.map(artist => ({
                             "label": artist.name
                         }))

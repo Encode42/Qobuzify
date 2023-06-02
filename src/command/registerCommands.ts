@@ -1,7 +1,7 @@
-import type { Command } from "~/type/command/Command";
+import type { Command } from "../type/command/Command";
 import { createCommand, createOption, program } from "commander";
-import { fetchCommand } from "~/command/fetchCommand";
-import { downloadCommand } from "~/command/downloadCommand";
+import { fetchCommand } from "./fetchCommand";
+import { downloadCommand } from "./downloadCommand";
 
 const commands: Command[] = [
     fetchCommand,

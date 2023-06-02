@@ -1,7 +1,7 @@
-import type { Command } from "~/type/command/Command";
-import { files } from "~/util/path";
+import type { Command } from "../type/command/Command";
+import { files } from "../util/path";
 import { $, chalk, retry, expBackoff } from "zx";
-import { getDownload } from "~/util/getDownload";
+import { getDownload } from "../util/getDownload";
 import { writeFile } from "node:fs/promises";
 
 const retries = 3;

@@ -1,6 +1,9 @@
 {
   "private": true,
   "scripts": {
+    "build": "pnpm run build:base && pnpm run build:binary",
+    "build:base": "ncc build src/index.ts -o build --minify",
+    "build:binary": "pkg build/index.js -t node18 --compress GZip -o build/qobuzify",
     "download": "pnpm run download:artists && pnpm run download:tracks",
     "download:artists": "tsx src/index.ts download artists",
     "download:tracks": "tsx src/index.ts download artists",
@@ -17,12 +20,15 @@
     "@types/node": "^20.2.5",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
+    "@vercel/ncc": "^0.36.1",
     "eslint": "^8.41.0",
     "eslint-plugin-jsonc": "^2.8.0",
     "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-security": "^1.7.1",
     "eslint-plugin-sonarjs": "^0.19.0",
     "eslint-plugin-unicorn": "^47.0.0",
+    "pkg": "^5.8.1",
+    "tsc-alias": "^1.8.6",
     "typescript": "^5.1.3"
   }
 }

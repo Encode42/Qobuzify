@@ -1,8 +1,8 @@
-import { initPath } from "~/util/path";
-import { getToken } from "~/util/getToken";
+import { initPath } from "./util/path";
+import { getToken } from "./util/getToken";
+import { registerCommands } from "./command/registerCommands";
 
 import { $ } from "zx";
-import { registerCommands } from "~/command/registerCommands";
 $.verbose = false;
 
 async function index() {

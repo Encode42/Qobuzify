@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v2
+      id: pnpm-install
+      with:
+        version: 7
+        run_install: false
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 20
+        cache: pnpm
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Build
+      run: pnpm run build
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: qobuzify
+        path: build/qobuzify
+
+    - name: Send webhook notification
+      if: always()
+      run: |
+        git clone https://github.com/Encode42/discord-workflows-webhook.git webhook
+        bash webhook/send.sh ${{ job.status }} ${{ secrets.WEBHOOK_URL }}
+      shell: bash
