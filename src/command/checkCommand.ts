@@ -48,17 +48,26 @@ export const checkCommand: Command = {
             downloadedTracks.push(`${artistName} - ${trackName}`.toUpperCase());
         }
 
-        const artists = Object.keys(await getDownload("artist")).map(artist => artist.toUpperCase());
-        const tracks = Object.keys(await getDownload("track")).map(track => track.toUpperCase());
+        const artists = await getDownload("artist");
+        const tracks = await getDownload("track");
 
-        const matchedArtists = match(artists, downloadedArtists, options.threshold);
-        const matchedTracks = match(tracks, downloadedTracks, options.threshold);
+        const artistNames = Object.keys(artists).map(artist => artist.toUpperCase());
+        const trackNames = Object.keys(tracks).map(track => track.toUpperCase());
 
-        printMatched("artists", matchedArtists.matches);
-        printMatched("tracks", matchedTracks.matches);
+        const matchedArtists = match(artistNames, downloadedArtists, options.threshold);
+        const matchedTracks = match(trackNames, downloadedTracks, options.threshold);
 
-        printNoMatched("artists", matchedArtists.noMatches);
-        printNoMatched("tracks", matchedTracks.noMatches);
+        printMatched(matchedArtists.matches);
+        printMatched(matchedTracks.matches);
+
+        printNoMatched(matchedArtists.noMatches);
+        printNoMatched(matchedTracks.noMatches);
+
+        filterNotDownloaded(artists);
+        filterNotDownloaded(tracks);
+
+        printNoMatched(Object.keys(artists), "☁");
+        printNoMatched(Object.keys(tracks), "☁");
     }
 };
 
@@ -97,14 +106,24 @@ function match(originals: string[], downloads: string[], threshold: number) {
     };
 }
 
-function printMatched(type: string, matches: Match[]) {
-    for (const match of matches) {
-        console.log(`- ${chalk.green(match.original)}${match.original === match.downloaded ? "" : ` (as ${match.downloaded})`}`);
+function filterNotDownloaded(map: Record<string, boolean>) {
+    for (const [key, value] of Object.entries(map)) {
+        if (!value) {
+            continue;
+        }
+
+        delete map[key];
     }
 }
 
-function printNoMatched(type: string, matches: string[]) {
+function printMatched(matches: Match[], point = "✔") {
     for (const match of matches) {
-        console.log(`- ${chalk.red(match)}`);
+        console.log(`${point} ${chalk.green(match.original)}${match.original === match.downloaded ? "" : ` (as ${match.downloaded})`}`);
+    }
+}
+
+function printNoMatched(matches: string[], point = "✖") {
+    for (const match of matches) {
+        console.log(`${point} ${chalk.red(match)}`);
     }
 }
