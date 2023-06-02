@@ -63,11 +63,9 @@ export const checkCommand: Command = {
         printNoMatched(matchedArtists.noMatches);
         printNoMatched(matchedTracks.noMatches);
 
-        filterNotDownloaded(artists);
-        filterNotDownloaded(tracks);
 
-        printNoMatched(Object.keys(artists), "☁");
-        printNoMatched(Object.keys(tracks), "☁");
+        printNoMatched(filterNotDownloaded(artists), "☁");
+        printNoMatched(filterNotDownloaded(tracks), "☁");
     }
 };
 
@@ -107,13 +105,17 @@ function match(originals: string[], downloads: string[], threshold: number) {
 }
 
 function filterNotDownloaded(map: Record<string, boolean>) {
+    const notDownloaded: string[] = [];
+
     for (const [key, value] of Object.entries(map)) {
-        if (!value) {
+        if (value) {
             continue;
         }
 
-        delete map[key];
+        notDownloaded.push(key.toUpperCase());
     }
+
+    return notDownloaded;
 }
 
 function printMatched(matches: Match[], point = "✔") {
