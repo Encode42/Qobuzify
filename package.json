@@ -7,7 +7,9 @@
     "download": "pnpm run download:artists && pnpm run download:tracks",
     "download:artists": "tsx src/index.ts download artists",
     "download:tracks": "tsx src/index.ts download artists",
-    "fetch": "tsx src/index.ts fetch"
+    "fetch": "tsx src/index.ts fetch",
+    "check": "tsx src/index.ts check",
+    "count": "tsx src/index.ts count"
   },
   "dependencies": {
     "commander": "^10.0.1",

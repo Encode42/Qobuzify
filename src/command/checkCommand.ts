@@ -4,6 +4,7 @@ import { basename, extname, sep } from "node:path";
 import { chalk } from "zx";
 import { closest, distance } from "fastest-levenshtein";
 import { getDownload } from "../util/getDownload";
+import { filterDownloaded } from "../util/filterDownloaded";
 
 interface Match {
     "original": string,
@@ -63,9 +64,8 @@ export const checkCommand: Command = {
         printNoMatched(matchedArtists.noMatches);
         printNoMatched(matchedTracks.noMatches);
 
-
-        printNoMatched(filterNotDownloaded(artists), "☁");
-        printNoMatched(filterNotDownloaded(tracks), "☁");
+        printNoMatched(filterDownloaded(artists, false), "☁");
+        printNoMatched(filterDownloaded(tracks, false), "☁");
     }
 };
 
@@ -102,20 +102,6 @@ function match(originals: string[], downloads: string[], threshold: number) {
         matches,
         noMatches
     };
-}
-
-function filterNotDownloaded(map: Record<string, boolean>) {
-    const notDownloaded: string[] = [];
-
-    for (const [key, value] of Object.entries(map)) {
-        if (value) {
-            continue;
-        }
-
-        notDownloaded.push(key.toUpperCase());
-    }
-
-    return notDownloaded;
 }
 
 function printMatched(matches: Match[], point = "✔") {

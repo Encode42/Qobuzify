@@ -3,9 +3,11 @@ import { createCommand, createOption, program } from "commander";
 import { fetchCommand } from "./fetchCommand";
 import { downloadCommand } from "./downloadCommand";
 import { checkCommand } from "./checkCommand";
+import { countCommand } from "./countCommand";
 
 const commands: Command[] = [
     checkCommand,
+    countCommand,
     fetchCommand,
     downloadCommand
 ];
