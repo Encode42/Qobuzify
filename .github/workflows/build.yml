@@ -30,14 +30,16 @@ jobs:
       run: pnpm install
 
     - name: Build
-      run: pnpm run build
+      run: |
+        pnpm run build
+        mv build/qobuzify .
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: qobuzify
         path: |
-          build/qobuzify
+          qobuzify
           .env.example
 
     - name: Send webhook notification
