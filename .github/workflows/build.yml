@@ -36,7 +36,9 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: qobuzify
-        path: build/qobuzify
+        path: |
+          build/qobuzify
+          .env.example
 
     - name: Send webhook notification
       if: always()
