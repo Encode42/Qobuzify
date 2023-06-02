@@ -2,8 +2,10 @@ import type { Command } from "../type/command/Command";
 import { createCommand, createOption, program } from "commander";
 import { fetchCommand } from "./fetchCommand";
 import { downloadCommand } from "./downloadCommand";
+import { checkCommand } from "./checkCommand";
 
 const commands: Command[] = [
+    checkCommand,
     fetchCommand,
     downloadCommand
 ];

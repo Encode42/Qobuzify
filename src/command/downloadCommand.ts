@@ -24,7 +24,7 @@ export const downloadCommand: Command = {
             $.verbose = true;
 
             try {
-                await retry(retries, expBackoff(), () => $`qobuz-dl lucky ${key} --type ${type} -q 27 --og-cover`);
+                await retry(retries, expBackoff(), () => $`qobuz-dl lucky ${key} --type ${type} -q 27 --og-cover --folder-format "{artist}/{album}" --track-format "{tracknumber} - {tracktitle}"`);
             } catch (error) {
                 console.warn(chalk.red(`Cannot download ${key} after ${retries} tries!`));
                 console.warn(error);
