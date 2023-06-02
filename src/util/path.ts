@@ -31,7 +31,7 @@ export async function initPath() {
         files.download[key as keyof typeof files.download] = format({
             "dir": directories.build,
             "name": value,
-            "ext": "json"
+            "ext": ".json"
         });
     }
 }
