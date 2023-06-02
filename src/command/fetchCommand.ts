@@ -1,5 +1,6 @@
 import type { Command } from "../type/command/Command";
 import { writeFile } from "node:fs/promises";
+import { chalk } from "zx";
 import { getProfilePlaylists } from "../util/getProfilePlaylists";
 import { files } from "../util/path";
 
@@ -16,8 +17,9 @@ export const fetchCommand: Command = {
         const tracks: DownloadedType = {};
 
         for (const userID of userIDs) {
-            const playlists = await getProfilePlaylists(userID);
+            console.log(chalk.bold(`Fetching playlists for ${userID}...`));
 
+            const playlists = await getProfilePlaylists(userID);
             for (const playlist of playlists) {
                 for (const track of playlist.tracks) {
                     tracks[`${track.artists[0].label} - ${track.label}`] = false;
@@ -27,6 +29,8 @@ export const fetchCommand: Command = {
                     }
                 }
             }
+
+            console.log(chalk.black.bgGreen("Done!"));
         }
 
         await writeFile(files.download.artist, JSON.stringify(artists));
