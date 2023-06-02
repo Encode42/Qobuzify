@@ -1,6 +1,7 @@
 import type { Command } from "../type/command/Command";
 import { writeFile } from "node:fs/promises";
 import { chalk } from "zx";
+import { getToken } from "../util/getToken";
 import { getProfilePlaylists } from "../util/getProfilePlaylists";
 import { files } from "../util/path";
 
@@ -13,6 +14,8 @@ export const fetchCommand: Command = {
     "description": "Fetch the playlists and their tracks for the specified user(s).",
     "arguments": "<userIDs...>",
     "action": async userIDs => {
+        await getToken();
+
         const artists: DownloadedType = {};
         const tracks: DownloadedType = {};
 
